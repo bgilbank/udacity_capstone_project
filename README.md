@@ -105,12 +105,12 @@ Completed blue_controller.json <https://github.com/bgilbank/udacity_capstone_pro
 
 Essentially, a blue green deployment runs two identical environments, so that you can test and validate your code before pushing it to a live environment. This approach reduces overall risk by allowing you to switch back to a working environment if one fails. The Kubernetes cluster that was created allows you to do this with the `$ kubectl config use-context` command.  
 
-# Make the service visible
+#### Make the service visible
 
 Inside of the project folder (blue_green_pipeline), create a new file called blue_green_service.json. This file will make the green app externally visible in step 9 of the Jenkinsfile. 
 
 *Completed file* <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/blue_green_service.json>
 
-# Add the Blue Green pipeline repository to Blue Ocean
+#### Add the Blue Green pipeline repository to Blue Ocean
 
 That's it, if all tests pass!
