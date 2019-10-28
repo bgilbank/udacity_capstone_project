@@ -8,9 +8,9 @@ To reproduce this project, create a new EC2 instance (t2.micro - Ubuntu 18.04 LT
 
 #### Install AWS CLI
 
-Follow this guide <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html>
+*Follow this guide* <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html>
 
-Make sure you use pip and not apt.
+**Note:** Make sure you use pip and not apt.
 
 Add your credentials with `$ aws configure`
 
@@ -26,7 +26,7 @@ sudo apt-get update
 sudo apt-get install -y jenkins
 ```
 
-Note: Make to sure you allow connections on port 8080.
+**Note:** Make sure you allow connections on port 8080.
 
 #### Install Jenkins Plugins
 
@@ -38,9 +38,9 @@ Note: Make to sure you allow connections on port 8080.
 #### Add your AWS credentials to Jenkins
 
 * Click on Credentials from the sidebar
-* Click on Global, then add credentials from the sidebar
+* Click on Global, then add your credentials from the sidebar
 * Choose AWS credentials from the dropdown
-* Enter your keys and click ok
+* Enter your AWS keys and click ok
 
 #### Add your Docker credentials to Jenkins
 
@@ -49,21 +49,21 @@ Note: Make to sure you allow connections on port 8080.
 
 #### Install Docker on your EC2 instance 
 
-Follow this guide: <https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04>
+*Follow this guide* <https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04>
 
 #### Install dependencies for AWS EKS
 
-Follow this guide <https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html>
+*Follow this guide* <https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html>
 
 #### Create two new Github repositories
 
-Create a new project folder called blue_green_pipeline and one called cluster_creation.
+Create a new project folder called **blue_green_pipeline** and one called **cluster_creation**.
 
 #### Cluster Creation
 
-In the cluster_creation folder, create a Jenkinsfile to use AWS EKS to create a Kubernetes cluster. Also, within the Jenkinsfile create a configuration file to store the information about your cluster. 
+In the cluster_creation folder, create a Jenkinsfile to use EKS to create a Kubernetes cluster. Also, within the Jenkinsfile create a configuration file to store the information about your cluster. 
 
-Completed Jenkinsfile <https://github.com/bgilbank/udacity_capstone_project/blob/master/cluster_creation/Jenkinsfile>
+*Completed Jenkinsfile* <https://github.com/bgilbank/udacity_capstone_project/blob/master/cluster_creation/Jenkinsfile>
 
 Once your Jenkins file is completed, open Jenkins in your browser and add the new pipeline inside of Blue Ocean (cluster_creation).
 
@@ -77,21 +77,21 @@ In the blue_green_pipeline folder, create a Jenkinsfile to set up the blue/green
 
 To build a local image on your EC2 instance, you will need to create a basic Dockerfile inside of your blue-green-pipeline folder.
 
-Completed file <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/Dockerfile>
+*Completed file* <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/Dockerfile>
 
 #### Create Blue and Green Controller files
 
-Create two new files inside of the blue_green_pipeline folder. These files will be blue_controller.json and green_controller.json.
+Create two new files inside of the blue_green_pipeline folder. These files will be **blue_controller.json** and **green_controller.json**.
 
-These are replicationController's, which ensure that the specified number of pod replicas are always up and running. I have only specified one in each case.
+These are replicationController's, which ensure that the specified number of pod replicas are always up and running. In this case, we only have one specified.
 
-Completed green_controller.json <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/green_controller.json>
+*Completed green_controller.json* <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/green_controller.json>
 
 Completed blue_controller.json <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/blue_controller.json>
 
-#### Update and Configure the Dockerfile to:
+#### Update and configure the Dockerfile to
 
-1. Lint HTML
+1. Lint your HTML file
 1. Build a local Docker image
 1. Push your image to Dockerhub
 1. Set Kubectl context 
@@ -101,16 +101,16 @@ Completed blue_controller.json <https://github.com/bgilbank/udacity_capstone_pro
 1. Wait for user input
 1. Update the service to redirect traffic to the Green Container
 
-Completed Jenkinsfile <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/Jenkinsfile>
+*Completed Jenkinsfile* <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/Jenkinsfile>
 
-Essentially, a blue green deployment runs two identical environments, so that you can test and validate your code before pushing it to a live environment. This approach reduces overall risk, by allowing you to switch back to a working environment if one fails. The Kubernetes cluster that was created allows you to do this with the `$ kubectl config use-context` command.  
+Essentially, a blue green deployment runs two identical environments, so that you can test and validate your code before pushing it to a live environment. This approach reduces overall risk by allowing you to switch back to a working environment if one fails. The Kubernetes cluster that was created allows you to do this with the `$ kubectl config use-context` command.  
 
 # Make the service visible
 
-Inside of the project folder (blue_green_pipeline), create a new file called blue_green_service.json. This file will make the green app externally visible. 
+Inside of the project folder (blue_green_pipeline), create a new file called blue_green_service.json. This file will make the green app externally visible in step 9 of the Jenkinsfile. 
 
-Completed file <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/blue_green_service.json>
+*Completed file* <https://github.com/bgilbank/udacity_capstone_project/blob/master/blue_green_pipeline/blue_green_service.json>
 
-# Add the Blue Green pipeline to Blue Ocean
+# Add the Blue Green pipeline repository to Blue Ocean
 
 That's it, if all tests pass!
